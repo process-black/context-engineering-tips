@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Deploy a GitHub Pages Site with the gh CLI</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 24px;
+      color: #1a1a1a;
+      line-height: 1.7;
+      background: #fafaf8;
+    }
+    .back { font-family: sans-serif; font-size: 0.9rem; margin-bottom: 2rem; }
+    .back a { color: #4f46e5; text-decoration: none; }
+    .back a:hover { text-decoration: underline; }
+    h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.25; margin: 0 0 0.5rem; color: #111; }
+    .intro { font-size: 1.05rem; color: #444; margin-bottom: 2.5rem; }
+    .step { margin-bottom: 2rem; }
+    .step h2 {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #4f46e5;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.4rem;
+    }
+    .step p { margin: 0 0 0.75rem; color: #333; font-size: 1.05rem; }
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin: 0.5rem 0 0;
+    }
+    code { font-family: 'Menlo', 'Monaco', monospace; }
+    .note {
+      background: #f0f0ff;
+      border-left: 4px solid #4f46e5;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #333;
+      margin-top: 0.75rem;
+    }
+    hr { border: none; border-top: 1px solid #ddd; margin: 2.5rem 0; }
+    .closing { font-style: italic; color: #555; font-size: 0.97rem; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="index.html">← Back to all tips</a></div>
+  <h1>How to Deploy a GitHub Pages Site with the gh CLI</h1>
+  <p class="intro">This guide walks through taking a folder of HTML files from your machine to a live public URL using the GitHub CLI (<code>gh</code>). No web interface needed.</p>
+
+  <div class="step">
+    <h2>Step 1 — Install the GitHub CLI</h2>
+    <p>If you don't have <code>gh</code> installed, use Homebrew:</p>
+    <pre><code>brew install gh</code></pre>
+    <p>Then authenticate:</p>
+    <pre><code>gh auth login</code></pre>
+    <p>Follow the browser prompt to complete login.</p>
+  </div>
+
+  <div class="step">
+    <h2>Step 2 — Initialize a local git repo</h2>
+    <p>From inside your project folder:</p>
+    <pre><code>git init
+git add .
+git commit -m "Initial commit"</code></pre>
+  </div>
+
+  <div class="step">
+    <h2>Step 3 — Create a GitHub repo and push</h2>
+    <p>This creates a public repo, sets it as the remote, and pushes in one command:</p>
+    <pre><code>gh repo create my-repo-name --public --source=. --push</code></pre>
+    <div class="note">Replace <code>my-repo-name</code> with whatever you want the repo to be called. Your site will live at <code>https://yourusername.github.io/my-repo-name/</code>.</div>
+  </div>
+
+  <div class="step">
+    <h2>Step 4 — Make sure your main file is named index.html</h2>
+    <p>GitHub Pages serves <code>index.html</code> as the default. If your main page has a different name, rename it and push:</p>
+    <pre><code>git mv your-page.html index.html
+git commit -m "Rename to index.html"
+git push</code></pre>
+  </div>
+
+  <div class="step">
+    <h2>Step 5 — Enable GitHub Pages</h2>
+    <p>Tell GitHub to serve your repo as a website:</p>
+    <pre><code>gh api repos/OWNER/REPO/pages \
+  --method POST \
+  --field source[branch]=master \
+  --field source[path]=/</code></pre>
+    <p>Replace <code>OWNER</code> with your GitHub username and <code>REPO</code> with your repo name.</p>
+    <div class="note">It takes a minute or two to deploy. Your site will be live at <code>https://OWNER.github.io/REPO/</code>.</div>
+  </div>
+
+  <div class="step">
+    <h2>Step 6 — (Optional) Add a custom domain</h2>
+    <p>Add a CNAME record in your DNS registrar:</p>
+    <pre><code>Type:  CNAME
+Host:  subdomain
+Value: OWNER.github.io</code></pre>
+    <p>Then add a <code>CNAME</code> file to your repo with just the domain on one line:</p>
+    <pre><code>echo "subdomain.yourdomain.com" > CNAME
+git add CNAME
+git commit -m "Add custom domain"
+git push</code></pre>
+    <p>Finally, set the custom domain in GitHub Pages settings:</p>
+    <pre><code>gh api repos/OWNER/REPO/pages \
+  --method PUT \
+  --field cname=subdomain.yourdomain.com</code></pre>
+  </div>
+
+  <hr>
+  <p class="closing">You now have a live static site with a public URL. Every future change is a <code>git push</code> away.</p>
+</body>
+</html>
