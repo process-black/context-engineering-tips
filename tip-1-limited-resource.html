@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip 1: Treat Context as a Limited Resource</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 24px;
+      color: #1a1a1a;
+      line-height: 1.7;
+      background: #fafaf8;
+    }
+    .back { font-family: sans-serif; font-size: 0.9rem; margin-bottom: 2rem; }
+    .back a { color: #4f46e5; text-decoration: none; }
+    .back a:hover { text-decoration: underline; }
+    .tag { font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    h1 { font-size: 1.9rem; font-weight: 700; line-height: 1.25; margin: 0.25rem 0 1.5rem; color: #111; }
+    p { color: #333; font-size: 1.05rem; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="context-engineering-tips.html">← Back to all tips</a></div>
+  <div class="tag">Tip 1</div>
+  <h1>Treat Context as a Limited Resource</h1>
+  <p>Every model has a context window, and even when it's large, more isn't always better. Irrelevant or redundant information dilutes the signal and can confuse the model. Before adding something to context, ask: "Does the model actually need this to answer well?" Trim aggressively. A focused, relevant context almost always beats a sprawling one.</p>
+</body>
+</html>

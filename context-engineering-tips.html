@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 Simple Tips on Context Engineering for Beginners</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 720px;
+      margin: 60px auto;
+      padding: 0 24px;
+      color: #1a1a1a;
+      line-height: 1.7;
+      background: #fafaf8;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    .intro {
+      font-size: 1.05rem;
+      color: #444;
+      margin-bottom: 2.5rem;
+    }
+    .tip {
+      background: #fff;
+      border-left: 4px solid #4f46e5;
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .tip h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      color: #4f46e5;
+    }
+    .tip h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tip h2 a:hover {
+      text-decoration: underline;
+    }
+    .tip p {
+      margin: 0;
+      color: #333;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 2.5rem 0;
+    }
+    .closing {
+      font-style: italic;
+      color: #555;
+      font-size: 0.97rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>5 Simple Tips on Context Engineering for Beginners</h1>
+  <p class="intro">Context engineering is the practice of shaping what an AI model sees so it can do its best work. Unlike prompt engineering, which focuses on the wording of a single instruction, context engineering is about curating the full set of information — instructions, examples, data, tool outputs, and prior conversation — that the model uses to reason. Here are five beginner-friendly tips to get started.</p>
+
+  <div class="tip">
+    <h2><a href="tip-1-limited-resource.html">1. Treat Context as a Limited Resource</a></h2>
+    <p>Every model has a context window, and even when it's large, more isn't always better. Irrelevant or redundant information dilutes the signal and can confuse the model. Before adding something to context, ask: "Does the model actually need this to answer well?" Trim aggressively. A focused, relevant context almost always beats a sprawling one.</p>
+  </div>
+
+  <div class="tip">
+    <h2><a href="tip-2-important-information.html">2. Put the Most Important Information Where It Counts</a></h2>
+    <p>Models tend to pay closer attention to information at the beginning and end of the context. Place critical instructions, the user's actual question, and key constraints near the top or bottom. Bury less important reference material in the middle. If you have a long document, consider summarizing it first rather than dumping it in raw.</p>
+  </div>
+
+  <div class="tip">
+    <h2><a href="tip-3-explicit-task.html">3. Be Explicit About the Task and Format</a></h2>
+    <p>Don't assume the model will infer what you want. State the goal, the audience, the tone, and the output format directly. If you want a bulleted list of three items, say so. If you want JSON, show the exact schema. Beginners often underspecify and then feel disappointed by vague results — clarity in, clarity out.</p>
+  </div>
+
+  <div class="tip">
+    <h2><a href="tip-4-use-examples.html">4. Use Examples to Show, Not Just Tell</a></h2>
+    <p>A few good examples (sometimes called "few-shot" examples) are often more powerful than a long written description. If you want the model to classify emails as urgent or not, show it two or three labeled examples first. Examples teach style, format, and edge cases in a way that abstract instructions rarely match.</p>
+  </div>
+
+  <div class="tip">
+    <h2><a href="tip-5-iterate-inspect.html">5. Iterate and Inspect</a></h2>
+    <p>Context engineering is empirical. When something goes wrong, look at exactly what the model saw — not just what you intended it to see. Did your system prompt actually get included? Did a retrieved document get truncated? Did old, stale context leak in? Most fixes come from observing the real input, spotting what's missing or noisy, and adjusting. Treat each interaction as a small experiment.</p>
+  </div>
+
+  <hr>
+  <p class="closing">A good mental model: you're not programming the AI, you're briefing a smart collaborator who only knows what you put in front of them. Give them the right materials, in the right order, with the right framing — and they'll do good work.</p>
+</body>
+</html>
